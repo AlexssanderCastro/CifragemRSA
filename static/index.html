@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RSA Manual - Cifragem Assimetrica</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>RSA Manual</h1>
+    <p class="subtitle">Geracao de chaves, cifragem e decifragem sem bibliotecas prontas de criptografia.</p>
+
+    <section class="card">
+      <h2>1) Gerar Par de Chaves</h2>
+      <p class="hint">Opcao A: deixe p e q vazios para gerar primos automaticamente por quantidade de bits.</p>
+      <label for="bits">Bits por primo (didatico):</label>
+      <input id="bits" type="number" min="8" value="16">
+
+      <p class="hint">Opcao B: informe p e q manualmente (primos distintos maiores que 256).</p>
+      <div class="grid-2">
+        <div>
+          <label for="manualP">p (manual)</label>
+          <input id="manualP" type="number" min="257" placeholder="Ex.: 3557">
+        </div>
+        <div>
+          <label for="manualQ">q (manual)</label>
+          <input id="manualQ" type="number" min="257" placeholder="Ex.: 2579">
+        </div>
+      </div>
+
+      <button id="btnGenerate">Gerar Chaves</button>
+
+      <p class="hint">Resultado da geracao de chaves:</p>
+      <div class="grid-2">
+        <div>
+          <label for="generatedPublicE">e gerado (publico)</label>
+          <input id="generatedPublicE" type="text" readonly>
+        </div>
+        <div>
+          <label for="generatedN">Modulo n</label>
+          <input id="generatedN" type="text" readonly>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <label for="generatedPrivateD">d gerado (privado)</label>
+          <input id="generatedPrivateD" type="text" readonly>
+        </div>
+        <div>
+          <label for="phi">phi(n)</label>
+          <input id="phi" type="text" readonly>
+        </div>
+      </div>
+
+      <details>
+        <summary>Mostrar valores internos (p e q)</summary>
+        <div class="grid-2 details-grid">
+          <div>
+            <label for="primeP">p</label>
+            <input id="primeP" type="text" readonly>
+          </div>
+          <div>
+            <label for="primeQ">q</label>
+            <input id="primeQ" type="text" readonly>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>2) Cifrar com Chave Publica</h2>
+      <div class="grid-2">
+        <div>
+          <label for="encryptE">Chave publica e (digitavel)</label>
+          <input id="encryptE" type="text" placeholder="Informe e para cifrar">
+        </div>
+        <div>
+          <label for="encryptN">Modulo n (digitavel)</label>
+          <input id="encryptN" type="text" placeholder="Informe n para cifrar">
+        </div>
+      </div>
+
+      <label for="plainText">Mensagem original:</label>
+      <textarea id="plainText" rows="4" placeholder="Digite a mensagem aqui..."></textarea>
+      <button id="btnEncrypt">Cifrar Mensagem</button>
+
+      <label for="cipherTextResult">Texto cifrado gerado (blocos separados por espaco):</label>
+      <textarea id="cipherTextResult" rows="4" readonly placeholder="O resultado da cifragem aparecera aqui..."></textarea>
+    </section>
+
+    <section class="card">
+      <h2>3) Decifrar com Chave Privada</h2>
+      <div class="grid-2">
+        <div>
+          <label for="decryptD">Chave privada d (digitavel)</label>
+          <input id="decryptD" type="text" placeholder="Informe d para decifrar">
+        </div>
+        <div>
+          <label for="decryptN">Modulo n (digitavel)</label>
+          <input id="decryptN" type="text" placeholder="Informe n para decifrar">
+        </div>
+      </div>
+
+      <label for="cipherTextInput">Texto cifrado para decifrar:</label>
+      <textarea id="cipherTextInput" rows="4" placeholder="Cole aqui o texto cifrado..."></textarea>
+
+      <button id="btnDecrypt">Decifrar Mensagem</button>
+      <label for="decryptedText">Mensagem decifrada:</label>
+      <textarea id="decryptedText" rows="4" readonly></textarea>
+    </section>
+
+    <p id="status" class="status"></p>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
